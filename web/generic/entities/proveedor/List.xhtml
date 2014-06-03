@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ProveedorListForm">
+
+        <p:panel header="#{paquetesTuristicos.ListProveedorTitle}">
+            <p:contextMenu id="ProveedorDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('ProveedorListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('ProveedorListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('ProveedorListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('ProveedorListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{paquetesTuristicos.ProveedorMenuItem_compraServiciosPaquetesCollection}" icon="ui-icon-search"  action="#{proveedorController.navigateCompraServiciosPaquetesCollection}" disabled="#{empty proveedorController.selected.compraServiciosPaquetesCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.ProveedorMenuItem_idPersona}" icon="ui-icon-search"  actionListener="#{proveedorController.prepareIdPersona}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty proveedorController.selected.idPersona}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{proveedorController.items}"
+                         var="item"
+                         rowKey="#{item.idProveedor}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{proveedorController.selected}">
+
+                <p:ajax event="rowSelect"   update=":ProveedorListForm:createButton :ProveedorListForm:viewButton :ProveedorListForm:editButton :ProveedorListForm:deleteButton :ProveedorListForm:ProveedorDataTableContextMenu" listener="#{proveedorController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":ProveedorListForm:createButton :ProveedorListForm:viewButton :ProveedorListForm:editButton :ProveedorListForm:deleteButton :ProveedorListForm:ProveedorDataTableContextMenu" listener="#{proveedorController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ProveedorListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idProveedor}" filterBy="#{item.idProveedor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_idProveedor}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idProveedor}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.razonSocial}" filterBy="#{item.razonSocial}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_razonSocial}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.razonSocial}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codigo}" filterBy="#{item.codigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_codigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_direccion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.telefono}" filterBy="#{item.telefono}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_telefono}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.telefono}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.paginaWeb}" filterBy="#{item.paginaWeb}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_paginaWeb}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.paginaWeb}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.email}" filterBy="#{item.email}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_email}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.email}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.confirmarProveedor}" filterBy="#{item.confirmarProveedor}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_confirmarProveedor}"/>
+                    </f:facet>
+                    <h:selectBooleanCheckbox id="confirmarProveedor" value="#{item.confirmarProveedor}" title="#{paquetesTuristicos.EditProveedorTitle_confirmarProveedor}" required="true" requiredMessage="#{paquetesTuristicos.EditProveedorRequiredMessage_confirmarProveedor}" disabled="true"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.idPersona.idPersona}" filterBy="#{item.idPersona.idPersona}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListProveedorTitle_idPersona}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idPersona.idPersona}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{proveedorController.prepareCreate}" update=":ProveedorCreateForm" oncomplete="PF('ProveedorCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":ProveedorViewForm" oncomplete="PF('ProveedorViewDialog').show()" disabled="#{empty proveedorController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":ProveedorEditForm" oncomplete="PF('ProveedorEditDialog').show()" disabled="#{empty proveedorController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{proveedorController.delete}" update=":growl,datalist" disabled="#{empty proveedorController.selected}">
+                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/generic/includes/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CompraServiciosPaquetesListForm">
+
+        <p:panel header="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle}">
+            <p:contextMenu id="CompraServiciosPaquetesDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('CompraServiciosPaquetesListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('CompraServiciosPaquetesListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('CompraServiciosPaquetesListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('CompraServiciosPaquetesListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{paquetesTuristicos.CompraServiciosPaquetesMenuItem_paqueteTuristicoCollection}" icon="ui-icon-search"  action="#{compraServiciosPaquetesController.navigatePaqueteTuristicoCollection}" disabled="#{empty compraServiciosPaquetesController.selected.paqueteTuristicoCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.CompraServiciosPaquetesMenuItem_servicioCollection}" icon="ui-icon-search"  action="#{compraServiciosPaquetesController.navigateServicioCollection}" disabled="#{empty compraServiciosPaquetesController.selected.servicioCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.CompraServiciosPaquetesMenuItem_registroCollection}" icon="ui-icon-search"  action="#{compraServiciosPaquetesController.navigateRegistroCollection}" disabled="#{empty compraServiciosPaquetesController.selected.registroCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.CompraServiciosPaquetesMenuItem_idProveedor}" icon="ui-icon-search"  actionListener="#{compraServiciosPaquetesController.prepareIdProveedor}" update=":ProveedorViewForm" oncomplete="PF('ProveedorViewDialog').show()" disabled="#{empty compraServiciosPaquetesController.selected.idProveedor}"/>  
+                <p:menuitem value="#{paquetesTuristicos.CompraServiciosPaquetesMenuItem_idPersona}" icon="ui-icon-search"  actionListener="#{compraServiciosPaquetesController.prepareIdPersona}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty compraServiciosPaquetesController.selected.idPersona}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{compraServiciosPaquetesController.items}"
+                         var="item"
+                         rowKey="#{item.idCompraServPaqt}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{compraServiciosPaquetesController.selected}">
+
+                <p:ajax event="rowSelect"   update=":CompraServiciosPaquetesListForm:createButton :CompraServiciosPaquetesListForm:viewButton :CompraServiciosPaquetesListForm:editButton :CompraServiciosPaquetesListForm:deleteButton :CompraServiciosPaquetesListForm:CompraServiciosPaquetesDataTableContextMenu" listener="#{compraServiciosPaquetesController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":CompraServiciosPaquetesListForm:createButton :CompraServiciosPaquetesListForm:viewButton :CompraServiciosPaquetesListForm:editButton :CompraServiciosPaquetesListForm:deleteButton :CompraServiciosPaquetesListForm:CompraServiciosPaquetesDataTableContextMenu" listener="#{compraServiciosPaquetesController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('CompraServiciosPaquetesListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idCompraServPaqt}" filterBy="#{item.idCompraServPaqt}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_idCompraServPaqt}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idCompraServPaqt}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codigo}" filterBy="#{item.codigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_codigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaCompra}" filterBy="#{item.fechaCompra}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_fechaCompra}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaCompra}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.modoPago}" filterBy="#{item.modoPago}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_modoPago}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.modoPago}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.total}" filterBy="#{item.total}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_total}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.total}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.iva}" filterBy="#{item.iva}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_iva}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.iva}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.subTotal}" filterBy="#{item.subTotal}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_subTotal}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.subTotal}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_estado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.idProveedor.idProveedor}" filterBy="#{item.idProveedor.idProveedor}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_idProveedor}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idProveedor.idProveedor}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.idPersona.idPersona}" filterBy="#{item.idPersona.idPersona}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListCompraServiciosPaquetesTitle_idPersona}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idPersona.idPersona}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{compraServiciosPaquetesController.prepareCreate}" update=":CompraServiciosPaquetesCreateForm" oncomplete="PF('CompraServiciosPaquetesCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":CompraServiciosPaquetesViewForm" oncomplete="PF('CompraServiciosPaquetesViewDialog').show()" disabled="#{empty compraServiciosPaquetesController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":CompraServiciosPaquetesEditForm" oncomplete="PF('CompraServiciosPaquetesEditDialog').show()" disabled="#{empty compraServiciosPaquetesController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{compraServiciosPaquetesController.delete}" update=":growl,datalist" disabled="#{empty compraServiciosPaquetesController.selected}">
+                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/generic/includes/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

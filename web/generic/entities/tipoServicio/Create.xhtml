@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoServicioCreateDlg" widgetVar="TipoServicioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateTipoServicioTitle}" closeOnEscape="true">
+
+            <h:form id="TipoServicioCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tipoServicioController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateTipoServicioLabel_tipo}" for="tipo" />
+                        <h:panelGroup>
+                            <p:inputText id="tipo" value="#{tipoServicioController.selected.tipo}" title="#{paquetesTuristicos.CreateTipoServicioTitle_tipo}" required="true" requiredMessage="#{paquetesTuristicos.CreateTipoServicioRequiredMessage_tipo}" size="20" maxlength="20"/>
+                            <p:tooltip for="tipo" value="#{tipoServicioController.getComponentMessages('tipo', paquetesTuristicos.CreateTipoServicioHelpText_tipo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoServicioController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:TipoServicioListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TipoServicioCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('TipoServicioCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

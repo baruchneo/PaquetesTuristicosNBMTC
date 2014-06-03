@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.ViewPersonaTitle}" closeOnEscape="true">
+
+            <h:form id="PersonaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{personaController.selected != null}">
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_idPersona}"/>
+                        <h:outputText value="#{personaController.selected.idPersona}" title="#{paquetesTuristicos.ViewPersonaTitle_idPersona}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_nombres}"/>
+                        <h:outputText value="#{personaController.selected.nombres}" title="#{paquetesTuristicos.ViewPersonaTitle_nombres}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_appellidos}"/>
+                        <h:outputText value="#{personaController.selected.appellidos}" title="#{paquetesTuristicos.ViewPersonaTitle_appellidos}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_numDocumento}"/>
+                        <h:outputText value="#{personaController.selected.numDocumento}" title="#{paquetesTuristicos.ViewPersonaTitle_numDocumento}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_tipoDocumento}"/>
+                        <h:outputText value="#{personaController.selected.tipoDocumento}" title="#{paquetesTuristicos.ViewPersonaTitle_tipoDocumento}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_usuario}"/>
+                        <h:outputText value="#{personaController.selected.usuario}" title="#{paquetesTuristicos.ViewPersonaTitle_usuario}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_clave}"/>
+                        <h:outputText value="#{personaController.selected.clave}" title="#{paquetesTuristicos.ViewPersonaTitle_clave}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_direccion}"/>
+                        <h:outputText value="#{personaController.selected.direccion}" title="#{paquetesTuristicos.ViewPersonaTitle_direccion}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_telefono}"/>
+                        <h:outputText value="#{personaController.selected.telefono}" title="#{paquetesTuristicos.ViewPersonaTitle_telefono}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_telefonoMovil}"/>
+                        <h:outputText value="#{personaController.selected.telefonoMovil}" title="#{paquetesTuristicos.ViewPersonaTitle_telefonoMovil}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_email}"/>
+                        <h:outputText value="#{personaController.selected.email}" title="#{paquetesTuristicos.ViewPersonaTitle_email}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_verificarUsuario}"/>
+                        <h:selectBooleanCheckbox id="verificarUsuario" value="#{personaController.selected.verificarUsuario}" title="#{paquetesTuristicos.EditPersonaTitle_verificarUsuario}"  disabled="true"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{personaController.selected.fechaNacimiento}" title="#{paquetesTuristicos.ViewPersonaTitle_fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_estado}"/>
+                        <h:outputText value="#{personaController.selected.estado}" title="#{paquetesTuristicos.ViewPersonaTitle_estado}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPersonaLabel_idTipoPersona}"/>
+                        <h:outputText value="#{personaController.selected.idTipoPersona.idTipoPersona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('PersonaViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

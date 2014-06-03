@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="MensajesListForm">
+
+        <p:panel header="#{paquetesTuristicos.ListMensajesTitle}">
+            <p:contextMenu id="MensajesDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('MensajesListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('MensajesListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('MensajesListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('MensajesListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{paquetesTuristicos.MensajesMenuItem_personaCollection}" icon="ui-icon-search"  action="#{mensajesController.navigatePersonaCollection}" disabled="#{empty mensajesController.selected.personaCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.MensajesMenuItem_registroCollection}" icon="ui-icon-search"  action="#{mensajesController.navigateRegistroCollection}" disabled="#{empty mensajesController.selected.registroCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{mensajesController.items}"
+                         var="item"
+                         rowKey="#{item.idMensaje}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{mensajesController.selected}">
+
+                <p:ajax event="rowSelect"   update=":MensajesListForm:createButton :MensajesListForm:viewButton :MensajesListForm:editButton :MensajesListForm:deleteButton :MensajesListForm:MensajesDataTableContextMenu" listener="#{mensajesController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":MensajesListForm:createButton :MensajesListForm:viewButton :MensajesListForm:editButton :MensajesListForm:deleteButton :MensajesListForm:MensajesDataTableContextMenu" listener="#{mensajesController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('MensajesListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idMensaje}" filterBy="#{item.idMensaje}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListMensajesTitle_idMensaje}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idMensaje}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.enunciado}" filterBy="#{item.enunciado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListMensajesTitle_enunciado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.enunciado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.emailOrigen}" filterBy="#{item.emailOrigen}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListMensajesTitle_emailOrigen}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.emailOrigen}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.emailDestino}" filterBy="#{item.emailDestino}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListMensajesTitle_emailDestino}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.emailDestino}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.mensaje}" filterBy="#{item.mensaje}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListMensajesTitle_mensaje}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.mensaje}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.tipoMensaje}" filterBy="#{item.tipoMensaje}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListMensajesTitle_tipoMensaje}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipoMensaje}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{mensajesController.prepareCreate}" update=":MensajesCreateForm" oncomplete="PF('MensajesCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":MensajesViewForm" oncomplete="PF('MensajesViewDialog').show()" disabled="#{empty mensajesController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":MensajesEditForm" oncomplete="PF('MensajesEditDialog').show()" disabled="#{empty mensajesController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{mensajesController.delete}" update=":growl,datalist" disabled="#{empty mensajesController.selected}">
+                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/generic/includes/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

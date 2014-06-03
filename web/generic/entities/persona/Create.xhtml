@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreatePersonaTitle}" closeOnEscape="true">
+
+            <h:form id="PersonaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{personaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_nombres}" for="nombres" />
+                        <h:panelGroup>
+                            <p:inputText id="nombres" value="#{personaController.selected.nombres}" title="#{paquetesTuristicos.CreatePersonaTitle_nombres}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_nombres}" size="60" maxlength="60"/>
+                            <p:tooltip for="nombres" value="#{personaController.getComponentMessages('nombres', paquetesTuristicos.CreatePersonaHelpText_nombres)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_appellidos}" for="appellidos" />
+                        <h:panelGroup>
+                            <p:inputText id="appellidos" value="#{personaController.selected.appellidos}" title="#{paquetesTuristicos.CreatePersonaTitle_appellidos}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_appellidos}" size="60" maxlength="60"/>
+                            <p:tooltip for="appellidos" value="#{personaController.getComponentMessages('appellidos', paquetesTuristicos.CreatePersonaHelpText_appellidos)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_numDocumento}" for="numDocumento" />
+                        <h:panelGroup>
+                            <p:inputText id="numDocumento" value="#{personaController.selected.numDocumento}" title="#{paquetesTuristicos.CreatePersonaTitle_numDocumento}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_numDocumento}" size="20" maxlength="20"/>
+                            <p:tooltip for="numDocumento" value="#{personaController.getComponentMessages('numDocumento', paquetesTuristicos.CreatePersonaHelpText_numDocumento)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_tipoDocumento}" for="tipoDocumento" />
+                        <h:panelGroup>
+                            <p:inputText id="tipoDocumento" value="#{personaController.selected.tipoDocumento}" title="#{paquetesTuristicos.CreatePersonaTitle_tipoDocumento}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_tipoDocumento}" size="20" maxlength="20"/>
+                            <p:tooltip for="tipoDocumento" value="#{personaController.getComponentMessages('tipoDocumento', paquetesTuristicos.CreatePersonaHelpText_tipoDocumento)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_usuario}" for="usuario" />
+                        <h:panelGroup>
+                            <p:inputText id="usuario" value="#{personaController.selected.usuario}" title="#{paquetesTuristicos.CreatePersonaTitle_usuario}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_usuario}" size="16" maxlength="16"/>
+                            <p:tooltip for="usuario" value="#{personaController.getComponentMessages('usuario', paquetesTuristicos.CreatePersonaHelpText_usuario)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_clave}" for="clave" />
+                        <h:panelGroup>
+                            <p:inputText id="clave" value="#{personaController.selected.clave}" title="#{paquetesTuristicos.CreatePersonaTitle_clave}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_clave}" size="60" maxlength="60"/>
+                            <p:tooltip for="clave" value="#{personaController.getComponentMessages('clave', paquetesTuristicos.CreatePersonaHelpText_clave)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_direccion}" for="direccion" />
+                        <h:panelGroup>
+                            <p:inputText id="direccion" value="#{personaController.selected.direccion}" title="#{paquetesTuristicos.CreatePersonaTitle_direccion}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_direccion}" size="60" maxlength="60"/>
+                            <p:tooltip for="direccion" value="#{personaController.getComponentMessages('direccion', paquetesTuristicos.CreatePersonaHelpText_direccion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_telefono}" for="telefono" />
+                        <h:panelGroup>
+                            <p:inputText id="telefono" value="#{personaController.selected.telefono}" title="#{paquetesTuristicos.CreatePersonaTitle_telefono}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_telefono}" size="10" maxlength="10"/>
+                            <p:tooltip for="telefono" value="#{personaController.getComponentMessages('telefono', paquetesTuristicos.CreatePersonaHelpText_telefono)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_telefonoMovil}" for="telefonoMovil" />
+                        <h:panelGroup>
+                            <p:inputText id="telefonoMovil" value="#{personaController.selected.telefonoMovil}" title="#{paquetesTuristicos.CreatePersonaTitle_telefonoMovil}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_telefonoMovil}" size="18" maxlength="18"/>
+                            <p:tooltip for="telefonoMovil" value="#{personaController.getComponentMessages('telefonoMovil', paquetesTuristicos.CreatePersonaHelpText_telefonoMovil)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_email}" for="email" />
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{personaController.selected.email}" title="#{paquetesTuristicos.CreatePersonaTitle_email}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_email}" size="80" maxlength="80"/>
+                            <p:tooltip for="email" value="#{personaController.getComponentMessages('email', paquetesTuristicos.CreatePersonaHelpText_email)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_verificarUsuario}" for="verificarUsuario" />
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="verificarUsuario" value="#{personaController.selected.verificarUsuario}" />
+                            <p:tooltip for="verificarUsuario" value="#{personaController.getComponentMessages('verificarUsuario', paquetesTuristicos.CreatePersonaHelpText_verificarUsuario)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{paquetesTuristicos.CreatePersonaTitle_fechaNacimiento}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_fechaNacimiento}" showOn="button"/>
+                            <p:tooltip for="fechaNacimiento" value="#{personaController.getComponentMessages('fechaNacimiento', paquetesTuristicos.CreatePersonaHelpText_fechaNacimiento)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_estado}" for="estado" />
+                        <h:panelGroup>
+                            <p:inputText id="estado" value="#{personaController.selected.estado}" title="#{paquetesTuristicos.CreatePersonaTitle_estado}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_estado}" size="20" maxlength="20"/>
+                            <p:tooltip for="estado" value="#{personaController.getComponentMessages('estado', paquetesTuristicos.CreatePersonaHelpText_estado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreatePersonaLabel_idTipoPersona}" for="idTipoPersona" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idTipoPersona" value="#{personaController.selected.idTipoPersona}" required="true" requiredMessage="#{paquetesTuristicos.CreatePersonaRequiredMessage_idTipoPersona}" converter="tipoPersonaConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{tipoPersonaController.items}"
+                                               var="idTipoPersonaItem"
+                                               itemValue="#{idTipoPersonaItem}"
+                                               itemLabel="#{idTipoPersonaItem.idTipoPersona.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idTipoPersona" value="#{personaController.getComponentMessages('idTipoPersona', paquetesTuristicos.CreatePersonaHelpText_idTipoPersona)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PersonaCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('PersonaCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

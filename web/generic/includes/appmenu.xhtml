@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menubar>
+                <p:menuitem value="#{paquetesTuristicos.Home}" outcome="/index" icon="ui-icon-home"/>
+                <p:submenu label="#{paquetesTuristicos.Maintenance}">
+                    <p:menuitem value="#{paquetesTuristicos.CompraServiciosPaquetesHeading}..." outcome="/generic/view/compraServiciosPaquetes/index" />
+                    <p:menuitem value="#{paquetesTuristicos.MensajesHeading}..." outcome="/generic/view/mensajes/index" />
+                    <p:menuitem value="#{paquetesTuristicos.PaqueteTuristicoHeading}..." outcome="/generic/view/paqueteTuristico/index" />
+                    <p:menuitem value="#{paquetesTuristicos.PersonaHeading}..." outcome="/generic/view/persona/index" />
+                    <p:menuitem value="#{paquetesTuristicos.ProveedorHeading}..." outcome="/generic/view/proveedor/index" />
+                    <p:menuitem value="#{paquetesTuristicos.RegistroHeading}..." outcome="/generic/view/registro/index" />
+                    <p:menuitem value="#{paquetesTuristicos.ServicioHeading}..." outcome="/generic/view/servicio/index" />
+                    <p:menuitem value="#{paquetesTuristicos.TipoPersonaHeading}..." outcome="/generic/view/tipoPersona/index" />
+                    <p:menuitem value="#{paquetesTuristicos.TipoRegistroHeading}..." outcome="/generic/view/tipoRegistro/index" />
+                    <p:menuitem value="#{paquetesTuristicos.TipoServicioHeading}..." outcome="/generic/view/tipoServicio/index" />
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+    </ui:composition>
+
+</html>

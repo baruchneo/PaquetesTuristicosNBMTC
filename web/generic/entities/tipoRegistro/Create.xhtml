@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoRegistroCreateDlg" widgetVar="TipoRegistroCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateTipoRegistroTitle}" closeOnEscape="true">
+
+            <h:form id="TipoRegistroCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tipoRegistroController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateTipoRegistroLabel_tipo}" for="tipo" />
+                        <h:panelGroup>
+                            <p:inputText id="tipo" value="#{tipoRegistroController.selected.tipo}" title="#{paquetesTuristicos.CreateTipoRegistroTitle_tipo}" required="true" requiredMessage="#{paquetesTuristicos.CreateTipoRegistroRequiredMessage_tipo}" size="20" maxlength="20"/>
+                            <p:tooltip for="tipo" value="#{tipoRegistroController.getComponentMessages('tipo', paquetesTuristicos.CreateTipoRegistroHelpText_tipo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoRegistroController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:TipoRegistroListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TipoRegistroCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('TipoRegistroCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

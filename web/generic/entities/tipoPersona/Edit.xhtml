@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TipoPersonaEditDlg" widgetVar="TipoPersonaEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.EditTipoPersonaTitle}" closeOnEscape="true">
+
+            <h:form id="TipoPersonaEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{tipoPersonaController.selected != null}">
+
+
+                        <h:outputLabel value="#{paquetesTuristicos.EditTipoPersonaLabel_idTipoPersona}" for="idTipoPersona" />
+                        <h:panelGroup>
+                            <h:outputText id="idTipoPersona" value="#{tipoPersonaController.selected.idTipoPersona}" />
+                            <p:tooltip for="idTipoPersona" value="#{tipoPersonaController.getComponentMessages('idTipoPersona', paquetesTuristicos.EditTipoPersonaHelpText_idTipoPersona)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditTipoPersonaLabel_tipo}" for="tipo" />
+                        <h:panelGroup>
+                            <p:inputText id="tipo" value="#{tipoPersonaController.selected.tipo}" title="#{paquetesTuristicos.EditTipoPersonaTitle_tipo}" required="true" requiredMessage="#{paquetesTuristicos.EditTipoPersonaRequiredMessage_tipo}" size="20" maxlength="20"/>
+                            <p:tooltip for="tipo" value="#{tipoPersonaController.getComponentMessages('tipo', paquetesTuristicos.EditTipoPersonaHelpText_tipo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoPersonaController.save}" value="#{paquetesTuristicos.Save}" update="display,:TipoPersonaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TipoPersonaEditDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('TipoPersonaEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

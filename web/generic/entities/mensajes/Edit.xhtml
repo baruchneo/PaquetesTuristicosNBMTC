@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="MensajesEditDlg" widgetVar="MensajesEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.EditMensajesTitle}" closeOnEscape="true">
+
+            <h:form id="MensajesEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{mensajesController.selected != null}">
+
+
+                        <h:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_idMensaje}" for="idMensaje" />
+                        <h:panelGroup>
+                            <h:outputText id="idMensaje" value="#{mensajesController.selected.idMensaje}" />
+                            <p:tooltip for="idMensaje" value="#{mensajesController.getComponentMessages('idMensaje', paquetesTuristicos.EditMensajesHelpText_idMensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_enunciado}" for="enunciado" />
+                        <h:panelGroup>
+                            <p:inputText id="enunciado" value="#{mensajesController.selected.enunciado}" title="#{paquetesTuristicos.EditMensajesTitle_enunciado}" required="true" requiredMessage="#{paquetesTuristicos.EditMensajesRequiredMessage_enunciado}" size="100" maxlength="100"/>
+                            <p:tooltip for="enunciado" value="#{mensajesController.getComponentMessages('enunciado', paquetesTuristicos.EditMensajesHelpText_enunciado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_emailOrigen}" for="emailOrigen" />
+                        <h:panelGroup>
+                            <p:inputText id="emailOrigen" value="#{mensajesController.selected.emailOrigen}" title="#{paquetesTuristicos.EditMensajesTitle_emailOrigen}" required="true" requiredMessage="#{paquetesTuristicos.EditMensajesRequiredMessage_emailOrigen}" size="80" maxlength="80"/>
+                            <p:tooltip for="emailOrigen" value="#{mensajesController.getComponentMessages('emailOrigen', paquetesTuristicos.EditMensajesHelpText_emailOrigen)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_emailDestino}" for="emailDestino" />
+                        <h:panelGroup>
+                            <p:inputText id="emailDestino" value="#{mensajesController.selected.emailDestino}" title="#{paquetesTuristicos.EditMensajesTitle_emailDestino}" required="true" requiredMessage="#{paquetesTuristicos.EditMensajesRequiredMessage_emailDestino}" size="80" maxlength="80"/>
+                            <p:tooltip for="emailDestino" value="#{mensajesController.getComponentMessages('emailDestino', paquetesTuristicos.EditMensajesHelpText_emailDestino)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_mensaje}" for="mensaje" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="mensaje" value="#{mensajesController.selected.mensaje}" title="#{paquetesTuristicos.EditMensajesTitle_mensaje}" required="true" requiredMessage="#{paquetesTuristicos.EditMensajesRequiredMessage_mensaje}"/>
+                            <p:tooltip for="mensaje" value="#{mensajesController.getComponentMessages('mensaje', paquetesTuristicos.EditMensajesHelpText_mensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_tipoMensaje}" for="tipoMensaje" />
+                        <h:panelGroup>
+                            <p:inputText id="tipoMensaje" value="#{mensajesController.selected.tipoMensaje}" title="#{paquetesTuristicos.EditMensajesTitle_tipoMensaje}" required="true" requiredMessage="#{paquetesTuristicos.EditMensajesRequiredMessage_tipoMensaje}" size="15" maxlength="15"/>
+                            <p:tooltip for="tipoMensaje" value="#{mensajesController.getComponentMessages('tipoMensaje', paquetesTuristicos.EditMensajesHelpText_tipoMensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditMensajesLabel_personaCollection}" for="personaCollection" />
+                        <h:panelGroup>
+                            <p:selectManyMenu id="personaCollection" value="#{mensajesController.selected.personaCollection}"  converter="personaConverter">
+                                <f:selectItems value="#{personaController.items}"
+                                               var="personaCollectionItem"
+                                               itemValue="#{personaCollectionItem}"
+                                               itemLabel="#{personaCollectionItem.idPersona.toString()}"
+                                               />
+
+                            </p:selectManyMenu>
+                            <p:tooltip for="personaCollection" value="#{mensajesController.getComponentMessages('personaCollection', paquetesTuristicos.EditMensajesHelpText_personaCollection)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mensajesController.save}" value="#{paquetesTuristicos.Save}" update="display,:MensajesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,MensajesEditDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('MensajesEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoPersonaCreateDlg" widgetVar="TipoPersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateTipoPersonaTitle}" closeOnEscape="true">
+
+            <h:form id="TipoPersonaCreateForm">
+
+                <h:panelGroup id="display" rendered="#{tipoPersonaController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateTipoPersonaLabel_tipo}" for="tipo" />
+                        <h:panelGroup>
+                            <p:inputText id="tipo" value="#{tipoPersonaController.selected.tipo}" title="#{paquetesTuristicos.CreateTipoPersonaTitle_tipo}" required="true" requiredMessage="#{paquetesTuristicos.CreateTipoPersonaRequiredMessage_tipo}" size="20" maxlength="20"/>
+                            <p:tooltip for="tipo" value="#{tipoPersonaController.getComponentMessages('tipo', paquetesTuristicos.CreateTipoPersonaHelpText_tipo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoPersonaController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:TipoPersonaListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TipoPersonaCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('TipoPersonaCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

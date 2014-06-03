@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="PersonaListForm">
+
+        <p:panel header="#{paquetesTuristicos.ListPersonaTitle}">
+            <p:contextMenu id="PersonaDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('PersonaListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('PersonaListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('PersonaListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('PersonaListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{paquetesTuristicos.PersonaMenuItem_mensajesCollection}" icon="ui-icon-search"  action="#{personaController.navigateMensajesCollection}" disabled="#{empty personaController.selected.mensajesCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.PersonaMenuItem_servicioCollection}" icon="ui-icon-search"  action="#{personaController.navigateServicioCollection}" disabled="#{empty personaController.selected.servicioCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.PersonaMenuItem_compraServiciosPaquetesCollection}" icon="ui-icon-search"  action="#{personaController.navigateCompraServiciosPaquetesCollection}" disabled="#{empty personaController.selected.compraServiciosPaquetesCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.PersonaMenuItem_proveedorCollection}" icon="ui-icon-search"  action="#{personaController.navigateProveedorCollection}" disabled="#{empty personaController.selected.proveedorCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.PersonaMenuItem_paqueteTuristicoCollection}" icon="ui-icon-search"  action="#{personaController.navigatePaqueteTuristicoCollection}" disabled="#{empty personaController.selected.paqueteTuristicoCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.PersonaMenuItem_idTipoPersona}" icon="ui-icon-search"  actionListener="#{personaController.prepareIdTipoPersona}" update=":TipoPersonaViewForm" oncomplete="PF('TipoPersonaViewDialog').show()" disabled="#{empty personaController.selected.idTipoPersona}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{personaController.items}"
+                         var="item"
+                         rowKey="#{item.idPersona}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{personaController.selected}">
+
+                <p:ajax event="rowSelect"   update=":PersonaListForm:createButton :PersonaListForm:viewButton :PersonaListForm:editButton :PersonaListForm:deleteButton :PersonaListForm:PersonaDataTableContextMenu" listener="#{personaController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":PersonaListForm:createButton :PersonaListForm:viewButton :PersonaListForm:editButton :PersonaListForm:deleteButton :PersonaListForm:PersonaDataTableContextMenu" listener="#{personaController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('PersonaListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idPersona}" filterBy="#{item.idPersona}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_idPersona}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idPersona}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nombres}" filterBy="#{item.nombres}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_nombres}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombres}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.appellidos}" filterBy="#{item.appellidos}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_appellidos}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.appellidos}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.numDocumento}" filterBy="#{item.numDocumento}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_numDocumento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numDocumento}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.tipoDocumento}" filterBy="#{item.tipoDocumento}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_tipoDocumento}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipoDocumento}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.usuario}" filterBy="#{item.usuario}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_usuario}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.usuario}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.clave}" filterBy="#{item.clave}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_clave}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.clave}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_direccion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccion}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.telefono}" filterBy="#{item.telefono}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_telefono}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.telefono}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.telefonoMovil}" filterBy="#{item.telefonoMovil}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_telefonoMovil}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.telefonoMovil}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.email}" filterBy="#{item.email}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_email}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.email}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.verificarUsuario}" filterBy="#{item.verificarUsuario}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_verificarUsuario}"/>
+                                        </f:facet>
+                                        <h:selectBooleanCheckbox id="verificarUsuario" value="#{item.verificarUsuario}" title="#{paquetesTuristicos.EditPersonaTitle_verificarUsuario}"  disabled="true"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.fechaNacimiento}" filterBy="#{item.fechaNacimiento}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_fechaNacimiento}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaNacimiento}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_estado}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estado}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.idTipoPersona.idTipoPersona}" filterBy="#{item.idTipoPersona.idTipoPersona}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListPersonaTitle_idTipoPersona}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idTipoPersona.idTipoPersona}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty personaController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" disabled="#{empty personaController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{personaController.delete}" update=":growl,datalist" disabled="#{empty personaController.selected}">
+                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/generic/includes/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

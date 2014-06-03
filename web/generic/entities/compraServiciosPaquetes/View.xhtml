@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompraServiciosPaquetesViewDlg" widgetVar="CompraServiciosPaquetesViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle}" closeOnEscape="true">
+
+            <h:form id="CompraServiciosPaquetesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{compraServiciosPaquetesController.selected != null}">
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_idCompraServPaqt}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.idCompraServPaqt}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_idCompraServPaqt}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_codigo}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.codigo}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_codigo}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_fechaCompra}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.fechaCompra}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_fechaCompra}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_modoPago}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.modoPago}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_modoPago}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_total}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.total}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_total}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_iva}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.iva}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_iva}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_subTotal}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.subTotal}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_subTotal}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_estado}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.estado}" title="#{paquetesTuristicos.ViewCompraServiciosPaquetesTitle_estado}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_paqueteTuristicoCollection}"/>
+                        <h:selectManyMenu converter="paqueteTuristicoConverter">
+                            <f:selectItems value="#{compraServiciosPaquetesController.selected.paqueteTuristicoCollection}"
+                                           var="paqueteTuristicoCollectionItem"
+                                           itemValue="#{paqueteTuristicoCollectionItem}"
+                                           itemLabel="#{paqueteTuristicoCollectionItem.descripcion.toString()}"
+                                           />
+
+                        </h:selectManyMenu>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_servicioCollection}"/>
+                        <h:selectManyMenu converter="servicioConverter">
+                            <f:selectItems value="#{compraServiciosPaquetesController.selected.servicioCollection}"
+                                           var="servicioCollectionItem"
+                                           itemValue="#{servicioCollectionItem}"
+                                           itemLabel="#{servicioCollectionItem.descripcion.toString()}"
+                                           />
+
+                        </h:selectManyMenu>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_idProveedor}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.idProveedor.idProveedor}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewCompraServiciosPaquetesLabel_idPersona}"/>
+                        <h:outputText value="#{compraServiciosPaquetesController.selected.idPersona.idPersona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('CompraServiciosPaquetesViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

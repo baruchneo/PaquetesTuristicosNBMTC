@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="TipoServicioListForm">
+
+        <p:panel header="#{paquetesTuristicos.ListTipoServicioTitle}">
+            <p:contextMenu id="TipoServicioDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('TipoServicioListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('TipoServicioListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('TipoServicioListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('TipoServicioListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{paquetesTuristicos.TipoServicioMenuItem_servicioCollection}" icon="ui-icon-search"  action="#{tipoServicioController.navigateServicioCollection}" disabled="#{empty tipoServicioController.selected.servicioCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{tipoServicioController.items}"
+                         var="item"
+                         rowKey="#{item.idTipoServicio}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{tipoServicioController.selected}">
+
+                <p:ajax event="rowSelect"   update=":TipoServicioListForm:createButton :TipoServicioListForm:viewButton :TipoServicioListForm:editButton :TipoServicioListForm:deleteButton :TipoServicioListForm:TipoServicioDataTableContextMenu" listener="#{tipoServicioController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":TipoServicioListForm:createButton :TipoServicioListForm:viewButton :TipoServicioListForm:editButton :TipoServicioListForm:deleteButton :TipoServicioListForm:TipoServicioDataTableContextMenu" listener="#{tipoServicioController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('TipoServicioListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idTipoServicio}" filterBy="#{item.idTipoServicio}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListTipoServicioTitle_idTipoServicio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idTipoServicio}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.tipo}" filterBy="#{item.tipo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListTipoServicioTitle_tipo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.tipo}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{tipoServicioController.prepareCreate}" update=":TipoServicioCreateForm" oncomplete="PF('TipoServicioCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":TipoServicioViewForm" oncomplete="PF('TipoServicioViewDialog').show()" disabled="#{empty tipoServicioController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":TipoServicioEditForm" oncomplete="PF('TipoServicioEditDialog').show()" disabled="#{empty tipoServicioController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{tipoServicioController.delete}" update=":growl,datalist" disabled="#{empty tipoServicioController.selected}">
+                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/generic/includes/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

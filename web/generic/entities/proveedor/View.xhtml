@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorViewDlg" widgetVar="ProveedorViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.ViewProveedorTitle}" closeOnEscape="true">
+
+            <h:form id="ProveedorViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{proveedorController.selected != null}">
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_idProveedor}"/>
+                        <h:outputText value="#{proveedorController.selected.idProveedor}" title="#{paquetesTuristicos.ViewProveedorTitle_idProveedor}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_razonSocial}"/>
+                        <h:outputText value="#{proveedorController.selected.razonSocial}" title="#{paquetesTuristicos.ViewProveedorTitle_razonSocial}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_codigo}"/>
+                        <h:outputText value="#{proveedorController.selected.codigo}" title="#{paquetesTuristicos.ViewProveedorTitle_codigo}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_direccion}"/>
+                        <h:outputText value="#{proveedorController.selected.direccion}" title="#{paquetesTuristicos.ViewProveedorTitle_direccion}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_telefono}"/>
+                        <h:outputText value="#{proveedorController.selected.telefono}" title="#{paquetesTuristicos.ViewProveedorTitle_telefono}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_paginaWeb}"/>
+                        <h:outputText value="#{proveedorController.selected.paginaWeb}" title="#{paquetesTuristicos.ViewProveedorTitle_paginaWeb}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_email}"/>
+                        <h:outputText value="#{proveedorController.selected.email}" title="#{paquetesTuristicos.ViewProveedorTitle_email}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_confirmarProveedor}"/>
+                        <h:selectBooleanCheckbox id="confirmarProveedor" value="#{proveedorController.selected.confirmarProveedor}" title="#{paquetesTuristicos.EditProveedorTitle_confirmarProveedor}" required="true" requiredMessage="#{paquetesTuristicos.EditProveedorRequiredMessage_confirmarProveedor}" disabled="true"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewProveedorLabel_idPersona}"/>
+                        <h:outputText value="#{proveedorController.selected.idPersona.idPersona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('ProveedorViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

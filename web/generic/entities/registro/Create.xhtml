@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RegistroCreateDlg" widgetVar="RegistroCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateRegistroTitle}" closeOnEscape="true">
+
+            <h:form id="RegistroCreateForm">
+
+                <h:panelGroup id="display" rendered="#{registroController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idRegistroLog}" for="idRegistroLog" />
+                        <h:panelGroup>
+                            <p:inputText id="idRegistroLog" value="#{registroController.selected.idRegistroLog}" title="#{paquetesTuristicos.CreateRegistroTitle_idRegistroLog}" required="true" requiredMessage="#{paquetesTuristicos.CreateRegistroRequiredMessage_idRegistroLog}"/>
+                            <p:tooltip for="idRegistroLog" value="#{registroController.getComponentMessages('idRegistroLog', paquetesTuristicos.CreateRegistroHelpText_idRegistroLog)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_titulo}" for="titulo" />
+                        <h:panelGroup>
+                            <p:inputText id="titulo" value="#{registroController.selected.titulo}" title="#{paquetesTuristicos.CreateRegistroTitle_titulo}" required="true" requiredMessage="#{paquetesTuristicos.CreateRegistroRequiredMessage_titulo}" size="60" maxlength="60"/>
+                            <p:tooltip for="titulo" value="#{registroController.getComponentMessages('titulo', paquetesTuristicos.CreateRegistroHelpText_titulo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_descripcion}" for="descripcion" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{registroController.selected.descripcion}" title="#{paquetesTuristicos.CreateRegistroTitle_descripcion}" required="true" requiredMessage="#{paquetesTuristicos.CreateRegistroRequiredMessage_descripcion}"/>
+                            <p:tooltip for="descripcion" value="#{registroController.getComponentMessages('descripcion', paquetesTuristicos.CreateRegistroHelpText_descripcion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_fechaRegistro}" for="fechaRegistro" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaRegistro" pattern="MM/dd/yyyy" value="#{registroController.selected.fechaRegistro}" title="#{paquetesTuristicos.CreateRegistroTitle_fechaRegistro}" required="true" requiredMessage="#{paquetesTuristicos.CreateRegistroRequiredMessage_fechaRegistro}" showOn="button"/>
+                            <p:tooltip for="fechaRegistro" value="#{registroController.getComponentMessages('fechaRegistro', paquetesTuristicos.CreateRegistroHelpText_fechaRegistro)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idPersona}" for="idPersona" />
+                        <h:panelGroup>
+                            <p:inputText id="idPersona" value="#{registroController.selected.idPersona}" title="#{paquetesTuristicos.CreateRegistroTitle_idPersona}" required="true" requiredMessage="#{paquetesTuristicos.CreateRegistroRequiredMessage_idPersona}"/>
+                            <p:tooltip for="idPersona" value="#{registroController.getComponentMessages('idPersona', paquetesTuristicos.CreateRegistroHelpText_idPersona)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idTipoRegistro}" for="idTipoRegistro" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idTipoRegistro" value="#{registroController.selected.idTipoRegistro}" required="true" requiredMessage="#{paquetesTuristicos.CreateRegistroRequiredMessage_idTipoRegistro}" converter="tipoRegistroConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{tipoRegistroController.items}"
+                                               var="idTipoRegistroItem"
+                                               itemValue="#{idTipoRegistroItem}"
+                                               itemLabel="#{idTipoRegistroItem.idTipoRegistro.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idTipoRegistro" value="#{registroController.getComponentMessages('idTipoRegistro', paquetesTuristicos.CreateRegistroHelpText_idTipoRegistro)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idServicio}" for="idServicio" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idServicio" value="#{registroController.selected.idServicio}"  converter="servicioConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{servicioController.items}"
+                                               var="idServicioItem"
+                                               itemValue="#{idServicioItem}"
+                                               itemLabel="#{idServicioItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idServicio" value="#{registroController.getComponentMessages('idServicio', paquetesTuristicos.CreateRegistroHelpText_idServicio)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idPaqueteTuristico}" for="idPaqueteTuristico" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idPaqueteTuristico" value="#{registroController.selected.idPaqueteTuristico}"  converter="paqueteTuristicoConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{paqueteTuristicoController.items}"
+                                               var="idPaqueteTuristicoItem"
+                                               itemValue="#{idPaqueteTuristicoItem}"
+                                               itemLabel="#{idPaqueteTuristicoItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idPaqueteTuristico" value="#{registroController.getComponentMessages('idPaqueteTuristico', paquetesTuristicos.CreateRegistroHelpText_idPaqueteTuristico)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idMensaje}" for="idMensaje" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idMensaje" value="#{registroController.selected.idMensaje}"  converter="mensajesConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{mensajesController.items}"
+                                               var="idMensajeItem"
+                                               itemValue="#{idMensajeItem}"
+                                               itemLabel="#{idMensajeItem.idMensaje.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idMensaje" value="#{registroController.getComponentMessages('idMensaje', paquetesTuristicos.CreateRegistroHelpText_idMensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateRegistroLabel_idCompraServPaqt}" for="idCompraServPaqt" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idCompraServPaqt" value="#{registroController.selected.idCompraServPaqt}"  converter="compraServiciosPaquetesConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{compraServiciosPaquetesController.items}"
+                                               var="idCompraServPaqtItem"
+                                               itemValue="#{idCompraServPaqtItem}"
+                                               itemLabel="#{idCompraServPaqtItem.idCompraServPaqt.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idCompraServPaqt" value="#{registroController.getComponentMessages('idCompraServPaqt', paquetesTuristicos.CreateRegistroHelpText_idCompraServPaqt)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{registroController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:RegistroListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,RegistroCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('RegistroCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

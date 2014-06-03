@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MensajesViewDlg" widgetVar="MensajesViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.ViewMensajesTitle}" closeOnEscape="true">
+
+            <h:form id="MensajesViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{mensajesController.selected != null}">
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_idMensaje}"/>
+                        <h:outputText value="#{mensajesController.selected.idMensaje}" title="#{paquetesTuristicos.ViewMensajesTitle_idMensaje}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_enunciado}"/>
+                        <h:outputText value="#{mensajesController.selected.enunciado}" title="#{paquetesTuristicos.ViewMensajesTitle_enunciado}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_emailOrigen}"/>
+                        <h:outputText value="#{mensajesController.selected.emailOrigen}" title="#{paquetesTuristicos.ViewMensajesTitle_emailOrigen}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_emailDestino}"/>
+                        <h:outputText value="#{mensajesController.selected.emailDestino}" title="#{paquetesTuristicos.ViewMensajesTitle_emailDestino}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_mensaje}"/>
+                        <h:outputText value="#{mensajesController.selected.mensaje}" title="#{paquetesTuristicos.ViewMensajesTitle_mensaje}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_tipoMensaje}"/>
+                        <h:outputText value="#{mensajesController.selected.tipoMensaje}" title="#{paquetesTuristicos.ViewMensajesTitle_tipoMensaje}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewMensajesLabel_personaCollection}"/>
+                        <h:selectManyMenu converter="personaConverter">
+                            <f:selectItems value="#{mensajesController.selected.personaCollection}"
+                                           var="personaCollectionItem"
+                                           itemValue="#{personaCollectionItem}"
+                                           itemLabel="#{personaCollectionItem.idPersona.toString()}"
+                                           />
+
+                        </h:selectManyMenu>
+                    </p:panelGrid>
+                    <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('MensajesViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

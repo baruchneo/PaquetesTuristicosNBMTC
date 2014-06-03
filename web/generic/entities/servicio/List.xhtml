@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ServicioListForm">
+
+        <p:panel header="#{paquetesTuristicos.ListServicioTitle}">
+            <p:contextMenu id="ServicioDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('ServicioListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('ServicioListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('ServicioListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('ServicioListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{paquetesTuristicos.ServicioMenuItem_paqueteTuristicoCollection}" icon="ui-icon-search"  action="#{servicioController.navigatePaqueteTuristicoCollection}" disabled="#{empty servicioController.selected.paqueteTuristicoCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.ServicioMenuItem_compraServiciosPaquetesCollection}" icon="ui-icon-search"  action="#{servicioController.navigateCompraServiciosPaquetesCollection}" disabled="#{empty servicioController.selected.compraServiciosPaquetesCollection}" ajax="false"/>  
+                <p:menuitem value="#{paquetesTuristicos.ServicioMenuItem_idTipoServicio}" icon="ui-icon-search"  actionListener="#{servicioController.prepareIdTipoServicio}" update=":TipoServicioViewForm" oncomplete="PF('TipoServicioViewDialog').show()" disabled="#{empty servicioController.selected.idTipoServicio}"/>  
+                <p:menuitem value="#{paquetesTuristicos.ServicioMenuItem_idPersona}" icon="ui-icon-search"  actionListener="#{servicioController.prepareIdPersona}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty servicioController.selected.idPersona}"/>  
+                <p:menuitem value="#{paquetesTuristicos.ServicioMenuItem_registroCollection}" icon="ui-icon-search"  action="#{servicioController.navigateRegistroCollection}" disabled="#{empty servicioController.selected.registroCollection}" ajax="false"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{servicioController.items}"
+                         var="item"
+                         rowKey="#{item.idServicio}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{servicioController.selected}">
+
+                <p:ajax event="rowSelect"   update=":ServicioListForm:createButton :ServicioListForm:viewButton :ServicioListForm:editButton :ServicioListForm:deleteButton :ServicioListForm:ServicioDataTableContextMenu" listener="#{servicioController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":ServicioListForm:createButton :ServicioListForm:viewButton :ServicioListForm:editButton :ServicioListForm:deleteButton :ServicioListForm:ServicioDataTableContextMenu" listener="#{servicioController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ServicioListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idServicio}" filterBy="#{item.idServicio}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_idServicio}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idServicio}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_nombre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.codigo}" filterBy="#{item.codigo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_codigo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.codigo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descripcion}" filterBy="#{item.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_descripcion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.ubicacion}" filterBy="#{item.ubicacion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_ubicacion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.ubicacion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.disponibilidad}" filterBy="#{item.disponibilidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_disponibilidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.disponibilidad}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.costo}" filterBy="#{item.costo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_costo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.costo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.oferta}" filterBy="#{item.oferta}">
+                    <f:facet name="header">
+                        <h:outputText value="#{paquetesTuristicos.ListServicioTitle_oferta}"/>
+                    </f:facet>
+                    <h:selectBooleanCheckbox id="oferta" value="#{item.oferta}" title="#{paquetesTuristicos.EditServicioTitle_oferta}"  disabled="true"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListServicioTitle_estado}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estado}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.publicado}" filterBy="#{item.publicado}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListServicioTitle_publicado}"/>
+                                        </f:facet>
+                                        <h:selectBooleanCheckbox id="publicado" value="#{item.publicado}" title="#{paquetesTuristicos.EditServicioTitle_publicado}"  disabled="true"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.idTipoServicio.idTipoServicio}" filterBy="#{item.idTipoServicio.idTipoServicio}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListServicioTitle_idTipoServicio}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idTipoServicio.idTipoServicio}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.idPersona.idPersona}" filterBy="#{item.idPersona.idPersona}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{paquetesTuristicos.ListServicioTitle_idPersona}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idPersona.idPersona}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{servicioController.prepareCreate}" update=":ServicioCreateForm" oncomplete="PF('ServicioCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":ServicioViewForm" oncomplete="PF('ServicioViewDialog').show()" disabled="#{empty servicioController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":ServicioEditForm" oncomplete="PF('ServicioEditDialog').show()" disabled="#{empty servicioController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{servicioController.delete}" update=":growl,datalist" disabled="#{empty servicioController.selected}">
+                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/generic/includes/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="TipoServicioEditDlg" widgetVar="TipoServicioEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.EditTipoServicioTitle}" closeOnEscape="true">
+
+            <h:form id="TipoServicioEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{tipoServicioController.selected != null}">
+
+
+                        <h:outputLabel value="#{paquetesTuristicos.EditTipoServicioLabel_idTipoServicio}" for="idTipoServicio" />
+                        <h:panelGroup>
+                            <h:outputText id="idTipoServicio" value="#{tipoServicioController.selected.idTipoServicio}" />
+                            <p:tooltip for="idTipoServicio" value="#{tipoServicioController.getComponentMessages('idTipoServicio', paquetesTuristicos.EditTipoServicioHelpText_idTipoServicio)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditTipoServicioLabel_tipo}" for="tipo" />
+                        <h:panelGroup>
+                            <p:inputText id="tipo" value="#{tipoServicioController.selected.tipo}" title="#{paquetesTuristicos.EditTipoServicioTitle_tipo}" required="true" requiredMessage="#{paquetesTuristicos.EditTipoServicioRequiredMessage_tipo}" size="20" maxlength="20"/>
+                            <p:tooltip for="tipo" value="#{tipoServicioController.getComponentMessages('tipo', paquetesTuristicos.EditTipoServicioHelpText_tipo)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoServicioController.save}" value="#{paquetesTuristicos.Save}" update="display,:TipoServicioListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,TipoServicioEditDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('TipoServicioEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

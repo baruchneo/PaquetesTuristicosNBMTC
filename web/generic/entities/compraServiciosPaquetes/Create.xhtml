@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompraServiciosPaquetesCreateDlg" widgetVar="CompraServiciosPaquetesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle}" closeOnEscape="true">
+
+            <h:form id="CompraServiciosPaquetesCreateForm">
+
+                <h:panelGroup id="display" rendered="#{compraServiciosPaquetesController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_codigo}" for="codigo" />
+                        <h:panelGroup>
+                            <p:inputText id="codigo" value="#{compraServiciosPaquetesController.selected.codigo}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_codigo}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_codigo}" size="20" maxlength="20"/>
+                            <p:tooltip for="codigo" value="#{compraServiciosPaquetesController.getComponentMessages('codigo', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_codigo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_fechaCompra}" for="fechaCompra" />
+                        <h:panelGroup>
+                            <p:calendar id="fechaCompra" pattern="MM/dd/yyyy" value="#{compraServiciosPaquetesController.selected.fechaCompra}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_fechaCompra}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_fechaCompra}" showOn="button"/>
+                            <p:tooltip for="fechaCompra" value="#{compraServiciosPaquetesController.getComponentMessages('fechaCompra', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_fechaCompra)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_modoPago}" for="modoPago" />
+                        <h:panelGroup>
+                            <p:inputText id="modoPago" value="#{compraServiciosPaquetesController.selected.modoPago}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_modoPago}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_modoPago}" size="20" maxlength="20"/>
+                            <p:tooltip for="modoPago" value="#{compraServiciosPaquetesController.getComponentMessages('modoPago', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_modoPago)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_total}" for="total" />
+                        <h:panelGroup>
+                            <p:inputText id="total" value="#{compraServiciosPaquetesController.selected.total}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_total}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_total}"/>
+                            <p:tooltip for="total" value="#{compraServiciosPaquetesController.getComponentMessages('total', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_total)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_iva}" for="iva" />
+                        <h:panelGroup>
+                            <p:inputText id="iva" value="#{compraServiciosPaquetesController.selected.iva}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_iva}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_iva}"/>
+                            <p:tooltip for="iva" value="#{compraServiciosPaquetesController.getComponentMessages('iva', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_iva)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_subTotal}" for="subTotal" />
+                        <h:panelGroup>
+                            <p:inputText id="subTotal" value="#{compraServiciosPaquetesController.selected.subTotal}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_subTotal}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_subTotal}"/>
+                            <p:tooltip for="subTotal" value="#{compraServiciosPaquetesController.getComponentMessages('subTotal', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_subTotal)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_estado}" for="estado" />
+                        <h:panelGroup>
+                            <p:inputText id="estado" value="#{compraServiciosPaquetesController.selected.estado}" title="#{paquetesTuristicos.CreateCompraServiciosPaquetesTitle_estado}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_estado}" size="20" maxlength="20"/>
+                            <p:tooltip for="estado" value="#{compraServiciosPaquetesController.getComponentMessages('estado', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_estado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_paqueteTuristicoCollection}" for="paqueteTuristicoCollection" />
+                        <h:panelGroup>
+                            <p:selectManyMenu id="paqueteTuristicoCollection" value="#{compraServiciosPaquetesController.selected.paqueteTuristicoCollection}"  converter="paqueteTuristicoConverter">
+                                <f:selectItems value="#{paqueteTuristicoController.items}"
+                                               var="paqueteTuristicoCollectionItem"
+                                               itemValue="#{paqueteTuristicoCollectionItem}"
+                                               itemLabel="#{paqueteTuristicoCollectionItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectManyMenu>
+                            <p:tooltip for="paqueteTuristicoCollection" value="#{compraServiciosPaquetesController.getComponentMessages('paqueteTuristicoCollection', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_paqueteTuristicoCollection)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_servicioCollection}" for="servicioCollection" />
+                        <h:panelGroup>
+                            <p:selectManyMenu id="servicioCollection" value="#{compraServiciosPaquetesController.selected.servicioCollection}"  converter="servicioConverter">
+                                <f:selectItems value="#{servicioController.items}"
+                                               var="servicioCollectionItem"
+                                               itemValue="#{servicioCollectionItem}"
+                                               itemLabel="#{servicioCollectionItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectManyMenu>
+                            <p:tooltip for="servicioCollection" value="#{compraServiciosPaquetesController.getComponentMessages('servicioCollection', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_servicioCollection)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_idProveedor}" for="idProveedor" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idProveedor" value="#{compraServiciosPaquetesController.selected.idProveedor}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_idProveedor}" converter="proveedorConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{proveedorController.items}"
+                                               var="idProveedorItem"
+                                               itemValue="#{idProveedorItem}"
+                                               itemLabel="#{idProveedorItem.idProveedor.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idProveedor" value="#{compraServiciosPaquetesController.getComponentMessages('idProveedor', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_idProveedor)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateCompraServiciosPaquetesLabel_idPersona}" for="idPersona" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idPersona" value="#{compraServiciosPaquetesController.selected.idPersona}" required="true" requiredMessage="#{paquetesTuristicos.CreateCompraServiciosPaquetesRequiredMessage_idPersona}" converter="personaConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{personaController.items}"
+                                               var="idPersonaItem"
+                                               itemValue="#{idPersonaItem}"
+                                               itemLabel="#{idPersonaItem.idPersona.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idPersona" value="#{compraServiciosPaquetesController.getComponentMessages('idPersona', paquetesTuristicos.CreateCompraServiciosPaquetesHelpText_idPersona)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{compraServiciosPaquetesController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:CompraServiciosPaquetesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,CompraServiciosPaquetesCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('CompraServiciosPaquetesCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

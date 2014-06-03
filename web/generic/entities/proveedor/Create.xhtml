@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedorCreateDlg" widgetVar="ProveedorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateProveedorTitle}" closeOnEscape="true">
+
+            <h:form id="ProveedorCreateForm">
+
+                <h:panelGroup id="display" rendered="#{proveedorController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_idProveedor}" for="idProveedor" />
+                        <h:panelGroup>
+                            <p:inputText id="idProveedor" value="#{proveedorController.selected.idProveedor}" title="#{paquetesTuristicos.CreateProveedorTitle_idProveedor}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_idProveedor}"/>
+                            <p:tooltip for="idProveedor" value="#{proveedorController.getComponentMessages('idProveedor', paquetesTuristicos.CreateProveedorHelpText_idProveedor)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_razonSocial}" for="razonSocial" />
+                        <h:panelGroup>
+                            <p:inputText id="razonSocial" value="#{proveedorController.selected.razonSocial}" title="#{paquetesTuristicos.CreateProveedorTitle_razonSocial}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_razonSocial}" size="60" maxlength="60"/>
+                            <p:tooltip for="razonSocial" value="#{proveedorController.getComponentMessages('razonSocial', paquetesTuristicos.CreateProveedorHelpText_razonSocial)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_codigo}" for="codigo" />
+                        <h:panelGroup>
+                            <p:inputText id="codigo" value="#{proveedorController.selected.codigo}" title="#{paquetesTuristicos.CreateProveedorTitle_codigo}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_codigo}" size="20" maxlength="20"/>
+                            <p:tooltip for="codigo" value="#{proveedorController.getComponentMessages('codigo', paquetesTuristicos.CreateProveedorHelpText_codigo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_direccion}" for="direccion" />
+                        <h:panelGroup>
+                            <p:inputText id="direccion" value="#{proveedorController.selected.direccion}" title="#{paquetesTuristicos.CreateProveedorTitle_direccion}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_direccion}" size="60" maxlength="60"/>
+                            <p:tooltip for="direccion" value="#{proveedorController.getComponentMessages('direccion', paquetesTuristicos.CreateProveedorHelpText_direccion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_telefono}" for="telefono" />
+                        <h:panelGroup>
+                            <p:inputText id="telefono" value="#{proveedorController.selected.telefono}" title="#{paquetesTuristicos.CreateProveedorTitle_telefono}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_telefono}" size="20" maxlength="20"/>
+                            <p:tooltip for="telefono" value="#{proveedorController.getComponentMessages('telefono', paquetesTuristicos.CreateProveedorHelpText_telefono)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_paginaWeb}" for="paginaWeb" />
+                        <h:panelGroup>
+                            <p:inputText id="paginaWeb" value="#{proveedorController.selected.paginaWeb}" title="#{paquetesTuristicos.CreateProveedorTitle_paginaWeb}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_paginaWeb}" size="60" maxlength="60"/>
+                            <p:tooltip for="paginaWeb" value="#{proveedorController.getComponentMessages('paginaWeb', paquetesTuristicos.CreateProveedorHelpText_paginaWeb)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_email}" for="email" />
+                        <h:panelGroup>
+                            <p:inputText id="email" value="#{proveedorController.selected.email}" title="#{paquetesTuristicos.CreateProveedorTitle_email}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_email}" size="80" maxlength="80"/>
+                            <p:tooltip for="email" value="#{proveedorController.getComponentMessages('email', paquetesTuristicos.CreateProveedorHelpText_email)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_confirmarProveedor}" for="confirmarProveedor" />
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="confirmarProveedor" value="#{proveedorController.selected.confirmarProveedor}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_confirmarProveedor}"/>
+                            <p:tooltip for="confirmarProveedor" value="#{proveedorController.getComponentMessages('confirmarProveedor', paquetesTuristicos.CreateProveedorHelpText_confirmarProveedor)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateProveedorLabel_idPersona}" for="idPersona" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idPersona" value="#{proveedorController.selected.idPersona}" required="true" requiredMessage="#{paquetesTuristicos.CreateProveedorRequiredMessage_idPersona}" converter="personaConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{personaController.items}"
+                                               var="idPersonaItem"
+                                               itemValue="#{idPersonaItem}"
+                                               itemLabel="#{idPersonaItem.idPersona.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idPersona" value="#{proveedorController.getComponentMessages('idPersona', paquetesTuristicos.CreateProveedorHelpText_idPersona)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedorController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:ProveedorListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ProveedorCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('ProveedorCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

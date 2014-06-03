@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MensajesCreateDlg" widgetVar="MensajesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{paquetesTuristicos.CreateMensajesTitle}" closeOnEscape="true">
+
+            <h:form id="MensajesCreateForm">
+
+                <h:panelGroup id="display" rendered="#{mensajesController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_idMensaje}" for="idMensaje" />
+                        <h:panelGroup>
+                            <p:inputText id="idMensaje" value="#{mensajesController.selected.idMensaje}" title="#{paquetesTuristicos.CreateMensajesTitle_idMensaje}" required="true" requiredMessage="#{paquetesTuristicos.CreateMensajesRequiredMessage_idMensaje}"/>
+                            <p:tooltip for="idMensaje" value="#{mensajesController.getComponentMessages('idMensaje', paquetesTuristicos.CreateMensajesHelpText_idMensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_enunciado}" for="enunciado" />
+                        <h:panelGroup>
+                            <p:inputText id="enunciado" value="#{mensajesController.selected.enunciado}" title="#{paquetesTuristicos.CreateMensajesTitle_enunciado}" required="true" requiredMessage="#{paquetesTuristicos.CreateMensajesRequiredMessage_enunciado}" size="100" maxlength="100"/>
+                            <p:tooltip for="enunciado" value="#{mensajesController.getComponentMessages('enunciado', paquetesTuristicos.CreateMensajesHelpText_enunciado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_emailOrigen}" for="emailOrigen" />
+                        <h:panelGroup>
+                            <p:inputText id="emailOrigen" value="#{mensajesController.selected.emailOrigen}" title="#{paquetesTuristicos.CreateMensajesTitle_emailOrigen}" required="true" requiredMessage="#{paquetesTuristicos.CreateMensajesRequiredMessage_emailOrigen}" size="80" maxlength="80"/>
+                            <p:tooltip for="emailOrigen" value="#{mensajesController.getComponentMessages('emailOrigen', paquetesTuristicos.CreateMensajesHelpText_emailOrigen)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_emailDestino}" for="emailDestino" />
+                        <h:panelGroup>
+                            <p:inputText id="emailDestino" value="#{mensajesController.selected.emailDestino}" title="#{paquetesTuristicos.CreateMensajesTitle_emailDestino}" required="true" requiredMessage="#{paquetesTuristicos.CreateMensajesRequiredMessage_emailDestino}" size="80" maxlength="80"/>
+                            <p:tooltip for="emailDestino" value="#{mensajesController.getComponentMessages('emailDestino', paquetesTuristicos.CreateMensajesHelpText_emailDestino)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_mensaje}" for="mensaje" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="mensaje" value="#{mensajesController.selected.mensaje}" title="#{paquetesTuristicos.CreateMensajesTitle_mensaje}" required="true" requiredMessage="#{paquetesTuristicos.CreateMensajesRequiredMessage_mensaje}"/>
+                            <p:tooltip for="mensaje" value="#{mensajesController.getComponentMessages('mensaje', paquetesTuristicos.CreateMensajesHelpText_mensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_tipoMensaje}" for="tipoMensaje" />
+                        <h:panelGroup>
+                            <p:inputText id="tipoMensaje" value="#{mensajesController.selected.tipoMensaje}" title="#{paquetesTuristicos.CreateMensajesTitle_tipoMensaje}" required="true" requiredMessage="#{paquetesTuristicos.CreateMensajesRequiredMessage_tipoMensaje}" size="15" maxlength="15"/>
+                            <p:tooltip for="tipoMensaje" value="#{mensajesController.getComponentMessages('tipoMensaje', paquetesTuristicos.CreateMensajesHelpText_tipoMensaje)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.CreateMensajesLabel_personaCollection}" for="personaCollection" />
+                        <h:panelGroup>
+                            <p:selectManyMenu id="personaCollection" value="#{mensajesController.selected.personaCollection}"  converter="personaConverter">
+                                <f:selectItems value="#{personaController.items}"
+                                               var="personaCollectionItem"
+                                               itemValue="#{personaCollectionItem}"
+                                               itemLabel="#{personaCollectionItem.idPersona.toString()}"
+                                               />
+
+                            </p:selectManyMenu>
+                            <p:tooltip for="personaCollection" value="#{mensajesController.getComponentMessages('personaCollection', paquetesTuristicos.CreateMensajesHelpText_personaCollection)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mensajesController.saveNew}" value="#{paquetesTuristicos.Save}" update="display,:MensajesListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,MensajesCreateDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('MensajesCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

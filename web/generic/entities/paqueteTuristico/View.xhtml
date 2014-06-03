@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PaqueteTuristicoViewDlg" widgetVar="PaqueteTuristicoViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.ViewPaqueteTuristicoTitle}" closeOnEscape="true">
+
+            <h:form id="PaqueteTuristicoViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{paqueteTuristicoController.selected != null}">
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_idPaqueteTuristico}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.idPaqueteTuristico}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_idPaqueteTuristico}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_nombre}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.nombre}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_nombre}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_codigo}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.codigo}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_codigo}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_descripcion}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.descripcion}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_descripcion}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_ubicacion}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.ubicacion}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_ubicacion}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_disponibilidad}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.disponibilidad}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_disponibilidad}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_costo}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.costo}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_costo}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_oferta}"/>
+                        <h:selectBooleanCheckbox id="oferta" value="#{paqueteTuristicoController.selected.oferta}" title="#{paquetesTuristicos.EditPaqueteTuristicoTitle_oferta}"  disabled="true"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_estado}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.estado}" title="#{paquetesTuristicos.ViewPaqueteTuristicoTitle_estado}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_publicado}"/>
+                        <h:selectBooleanCheckbox id="publicado" value="#{paqueteTuristicoController.selected.publicado}" title="#{paquetesTuristicos.EditPaqueteTuristicoTitle_publicado}"  disabled="true"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_servicioCollection}"/>
+                        <h:selectManyMenu converter="servicioConverter">
+                            <f:selectItems value="#{paqueteTuristicoController.selected.servicioCollection}"
+                                           var="servicioCollectionItem"
+                                           itemValue="#{servicioCollectionItem}"
+                                           itemLabel="#{servicioCollectionItem.descripcion.toString()}"
+                                           />
+
+                        </h:selectManyMenu>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewPaqueteTuristicoLabel_idPersona}"/>
+                        <h:outputText value="#{paqueteTuristicoController.selected.idPersona.idPersona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('PaqueteTuristicoViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

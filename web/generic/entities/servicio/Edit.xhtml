@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ServicioEditDlg" widgetVar="ServicioEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.EditServicioTitle}" closeOnEscape="true">
+
+            <h:form id="ServicioEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{servicioController.selected != null}">
+
+
+                        <h:outputLabel value="#{paquetesTuristicos.EditServicioLabel_idServicio}" for="idServicio" />
+                        <h:panelGroup>
+                            <h:outputText id="idServicio" value="#{servicioController.selected.idServicio}" />
+                            <p:tooltip for="idServicio" value="#{servicioController.getComponentMessages('idServicio', paquetesTuristicos.EditServicioHelpText_idServicio)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_nombre}" for="nombre" />
+                        <h:panelGroup>
+                            <p:inputText id="nombre" value="#{servicioController.selected.nombre}" title="#{paquetesTuristicos.EditServicioTitle_nombre}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_nombre}" size="60" maxlength="60"/>
+                            <p:tooltip for="nombre" value="#{servicioController.getComponentMessages('nombre', paquetesTuristicos.EditServicioHelpText_nombre)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_codigo}" for="codigo" />
+                        <h:panelGroup>
+                            <p:inputText id="codigo" value="#{servicioController.selected.codigo}" title="#{paquetesTuristicos.EditServicioTitle_codigo}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_codigo}" size="10" maxlength="10"/>
+                            <p:tooltip for="codigo" value="#{servicioController.getComponentMessages('codigo', paquetesTuristicos.EditServicioHelpText_codigo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_descripcion}" for="descripcion" />
+                        <h:panelGroup>
+                            <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{servicioController.selected.descripcion}" title="#{paquetesTuristicos.EditServicioTitle_descripcion}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_descripcion}"/>
+                            <p:tooltip for="descripcion" value="#{servicioController.getComponentMessages('descripcion', paquetesTuristicos.EditServicioHelpText_descripcion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_ubicacion}" for="ubicacion" />
+                        <h:panelGroup>
+                            <p:inputText id="ubicacion" value="#{servicioController.selected.ubicacion}" title="#{paquetesTuristicos.EditServicioTitle_ubicacion}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_ubicacion}" size="25" maxlength="25"/>
+                            <p:tooltip for="ubicacion" value="#{servicioController.getComponentMessages('ubicacion', paquetesTuristicos.EditServicioHelpText_ubicacion)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_disponibilidad}" for="disponibilidad" />
+                        <h:panelGroup>
+                            <p:inputText id="disponibilidad" value="#{servicioController.selected.disponibilidad}" title="#{paquetesTuristicos.EditServicioTitle_disponibilidad}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_disponibilidad}"/>
+                            <p:tooltip for="disponibilidad" value="#{servicioController.getComponentMessages('disponibilidad', paquetesTuristicos.EditServicioHelpText_disponibilidad)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_costo}" for="costo" />
+                        <h:panelGroup>
+                            <p:inputText id="costo" value="#{servicioController.selected.costo}" title="#{paquetesTuristicos.EditServicioTitle_costo}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_costo}"/>
+                            <p:tooltip for="costo" value="#{servicioController.getComponentMessages('costo', paquetesTuristicos.EditServicioHelpText_costo)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_oferta}" for="oferta" />
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="oferta" value="#{servicioController.selected.oferta}" />
+                            <p:tooltip for="oferta" value="#{servicioController.getComponentMessages('oferta', paquetesTuristicos.EditServicioHelpText_oferta)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_estado}" for="estado" />
+                        <h:panelGroup>
+                            <p:inputText id="estado" value="#{servicioController.selected.estado}" title="#{paquetesTuristicos.EditServicioTitle_estado}" size="10" maxlength="10"/>
+                            <p:tooltip for="estado" value="#{servicioController.getComponentMessages('estado', paquetesTuristicos.EditServicioHelpText_estado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_publicado}" for="publicado" />
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox id="publicado" value="#{servicioController.selected.publicado}" />
+                            <p:tooltip for="publicado" value="#{servicioController.getComponentMessages('publicado', paquetesTuristicos.EditServicioHelpText_publicado)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_idTipoServicio}" for="idTipoServicio" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idTipoServicio" value="#{servicioController.selected.idTipoServicio}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_idTipoServicio}" converter="tipoServicioConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{tipoServicioController.items}"
+                                               var="idTipoServicioItem"
+                                               itemValue="#{idTipoServicioItem}"
+                                               itemLabel="#{idTipoServicioItem.idTipoServicio.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idTipoServicio" value="#{servicioController.getComponentMessages('idTipoServicio', paquetesTuristicos.EditServicioHelpText_idTipoServicio)}"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="#{paquetesTuristicos.EditServicioLabel_idPersona}" for="idPersona" />
+                        <h:panelGroup>
+                            <p:selectOneMenu id="idPersona" value="#{servicioController.selected.idPersona}" required="true" requiredMessage="#{paquetesTuristicos.EditServicioRequiredMessage_idPersona}" converter="personaConverter">
+                                <f:selectItem itemLabel="#{paquetesTuristicos.SelectOneMessage}"/>
+                                <f:selectItems value="#{personaController.items}"
+                                               var="idPersonaItem"
+                                               itemValue="#{idPersonaItem}"
+                                               itemLabel="#{idPersonaItem.idPersona.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                            <p:tooltip for="idPersona" value="#{servicioController.getComponentMessages('idPersona', paquetesTuristicos.EditServicioHelpText_idPersona)}"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{servicioController.save}" value="#{paquetesTuristicos.Save}" update="display,:ServicioListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,ServicioEditDialog);">
+                        <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{paquetesTuristicos.Cancel}" onclick="PF('ServicioEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

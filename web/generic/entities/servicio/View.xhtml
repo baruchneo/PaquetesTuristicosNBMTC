@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ServicioViewDlg" widgetVar="ServicioViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{paquetesTuristicos.ViewServicioTitle}" closeOnEscape="true">
+
+            <h:form id="ServicioViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{servicioController.selected != null}">
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_idServicio}"/>
+                        <h:outputText value="#{servicioController.selected.idServicio}" title="#{paquetesTuristicos.ViewServicioTitle_idServicio}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_nombre}"/>
+                        <h:outputText value="#{servicioController.selected.nombre}" title="#{paquetesTuristicos.ViewServicioTitle_nombre}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_codigo}"/>
+                        <h:outputText value="#{servicioController.selected.codigo}" title="#{paquetesTuristicos.ViewServicioTitle_codigo}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_descripcion}"/>
+                        <h:outputText value="#{servicioController.selected.descripcion}" title="#{paquetesTuristicos.ViewServicioTitle_descripcion}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_ubicacion}"/>
+                        <h:outputText value="#{servicioController.selected.ubicacion}" title="#{paquetesTuristicos.ViewServicioTitle_ubicacion}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_disponibilidad}"/>
+                        <h:outputText value="#{servicioController.selected.disponibilidad}" title="#{paquetesTuristicos.ViewServicioTitle_disponibilidad}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_costo}"/>
+                        <h:outputText value="#{servicioController.selected.costo}" title="#{paquetesTuristicos.ViewServicioTitle_costo}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_oferta}"/>
+                        <h:selectBooleanCheckbox id="oferta" value="#{servicioController.selected.oferta}" title="#{paquetesTuristicos.EditServicioTitle_oferta}"  disabled="true"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_estado}"/>
+                        <h:outputText value="#{servicioController.selected.estado}" title="#{paquetesTuristicos.ViewServicioTitle_estado}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_publicado}"/>
+                        <h:selectBooleanCheckbox id="publicado" value="#{servicioController.selected.publicado}" title="#{paquetesTuristicos.EditServicioTitle_publicado}"  disabled="true"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_idTipoServicio}"/>
+                        <h:outputText value="#{servicioController.selected.idTipoServicio.idTipoServicio}"/>
+
+                        <h:outputText value="#{paquetesTuristicos.ViewServicioLabel_idPersona}"/>
+                        <h:outputText value="#{servicioController.selected.idPersona.idPersona}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('ServicioViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
