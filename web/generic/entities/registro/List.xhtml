@@ -10,10 +10,7 @@
 
         <p:panel header="#{paquetesTuristicos.ListRegistroTitle}">
             <p:contextMenu id="RegistroDataTableContextMenu" for="datalist">  
-                <p:menuitem value="#{paquetesTuristicos.Create}" onclick="document.getElementById('RegistroListForm:createButton').click();" icon="ui-icon-plus"/>
                 <p:menuitem value="#{paquetesTuristicos.View}" onclick="document.getElementById('RegistroListForm:viewButton').click();" icon="ui-icon-search"/>
-                <p:menuitem value="#{paquetesTuristicos.Edit}" onclick="document.getElementById('RegistroListForm:editButton').click();" icon="ui-icon-pencil"/>
-                <p:menuitem value="#{paquetesTuristicos.Delete}" onclick="document.getElementById('RegistroListForm:deleteButton').click();" icon="ui-icon-trash"/>
                 <p:separator/>
                 <p:menuitem value="#{paquetesTuristicos.RegistroMenuItem_idTipoRegistro}" icon="ui-icon-search"  actionListener="#{registroController.prepareIdTipoRegistro}" update=":TipoRegistroViewForm" oncomplete="PF('TipoRegistroViewDialog').show()" disabled="#{empty registroController.selected.idTipoRegistro}"/>  
                 <p:menuitem value="#{paquetesTuristicos.RegistroMenuItem_idServicio}" icon="ui-icon-search"  actionListener="#{registroController.prepareIdServicio}" update=":ServicioViewForm" oncomplete="PF('ServicioViewDialog').show()" disabled="#{empty registroController.selected.idServicio}"/>  
@@ -31,8 +28,8 @@
                          selectionMode="single"
                          selection="#{registroController.selected}">
 
-                <p:ajax event="rowSelect"   update=":RegistroListForm:createButton :RegistroListForm:viewButton :RegistroListForm:editButton :RegistroListForm:deleteButton :RegistroListForm:RegistroDataTableContextMenu" listener="#{registroController.resetParents}"/>
-                <p:ajax event="rowUnselect" update=":RegistroListForm:createButton :RegistroListForm:viewButton :RegistroListForm:editButton :RegistroListForm:deleteButton :RegistroListForm:RegistroDataTableContextMenu" listener="#{registroController.resetParents}"/>
+                <p:ajax event="rowSelect"   update=":RegistroListForm:viewButton :RegistroListForm:RegistroDataTableContextMenu" listener="#{registroController.resetParents}"/>
+                <p:ajax event="rowUnselect" update=":RegistroListForm:viewButton :RegistroListForm:RegistroDataTableContextMenu" listener="#{registroController.resetParents}"/>
                 <p:ajax event="rowDblselect" onsuccess="document.getElementById('RegistroListForm:viewButton').click();"/>
 
                 <p:column sortBy="#{item.idRegistroLog}" filterBy="#{item.idRegistroLog}">
@@ -68,63 +65,9 @@
                     </h:outputText>
                 </p:column>
 
-
-                <p:column sortBy="#{item.idPersona}" filterBy="#{item.idPersona}">
-                    <f:facet name="header">
-                        <h:outputText value="#{paquetesTuristicos.ListRegistroTitle_idPersona}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idPersona}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.idTipoRegistro.idTipoRegistro}" filterBy="#{item.idTipoRegistro.idTipoRegistro}">
-                    <f:facet name="header">
-                        <h:outputText value="#{paquetesTuristicos.ListRegistroTitle_idTipoRegistro}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idTipoRegistro.idTipoRegistro}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.idServicio.descripcion}" filterBy="#{item.idServicio.descripcion}">
-                    <f:facet name="header">
-                        <h:outputText value="#{paquetesTuristicos.ListRegistroTitle_idServicio}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idServicio.descripcion}"/>
-                </p:column>
-
-
-                <p:column sortBy="#{item.idPaqueteTuristico.descripcion}" filterBy="#{item.idPaqueteTuristico.descripcion}">
-                    <f:facet name="header">
-                        <h:outputText value="#{paquetesTuristicos.ListRegistroTitle_idPaqueteTuristico}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idPaqueteTuristico.descripcion}"/>
-                </p:column>
-
-                <!--
-                                    <p:column sortBy="#{item.idMensaje.idMensaje}" filterBy="#{item.idMensaje.idMensaje}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{paquetesTuristicos.ListRegistroTitle_idMensaje}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.idMensaje.idMensaje}"/>
-                                    </p:column>
-                -->
-                <!--
-                                    <p:column sortBy="#{item.idCompraServPaqt.idCompraServPaqt}" filterBy="#{item.idCompraServPaqt.idCompraServPaqt}">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{paquetesTuristicos.ListRegistroTitle_idCompraServPaqt}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.idCompraServPaqt.idCompraServPaqt}"/>
-                                    </p:column>
-                -->
-
             </p:dataTable>
 
-            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{paquetesTuristicos.Create}" actionListener="#{registroController.prepareCreate}" update=":RegistroCreateForm" oncomplete="PF('RegistroCreateDialog').show()"/>
             <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{paquetesTuristicos.View}" update=":RegistroViewForm" oncomplete="PF('RegistroViewDialog').show()" disabled="#{empty registroController.selected}"/>
-            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{paquetesTuristicos.Edit}" update=":RegistroEditForm" oncomplete="PF('RegistroEditDialog').show()" disabled="#{empty registroController.selected}"/>
-            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{paquetesTuristicos.Delete}" actionListener="#{registroController.delete}" update=":growl,datalist" disabled="#{empty registroController.selected}">
-                <p:confirm header="#{paquetesTuristicos.ConfirmationHeader}" message="#{paquetesTuristicos.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
-            </p:commandButton>
 
         </p:panel>
         <ui:include src="/generic/includes/confirmation.xhtml"/>

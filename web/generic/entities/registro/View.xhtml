@@ -30,22 +30,22 @@
                         </h:outputText>
 
                         <h:outputText value="#{paquetesTuristicos.ViewRegistroLabel_idPersona}"/>
-                        <h:outputText value="#{registroController.selected.idPersona}" title="#{paquetesTuristicos.ViewRegistroTitle_idPersona}"/>
+                        <h:outputText value="#{registroController.selected.idPersona.nombres}&nbsp;#{registroController.selected.idPersona.appellidos}" title="#{paquetesTuristicos.ViewRegistroTitle_idPersona}"/>
 
                         <h:outputText value="#{paquetesTuristicos.ViewRegistroLabel_idTipoRegistro}"/>
-                        <h:outputText value="#{registroController.selected.idTipoRegistro.idTipoRegistro}"/>
+                        <h:outputText value="#{registroController.selected.idTipoRegistro.tipo}"/>
 
                         <h:outputText value="#{paquetesTuristicos.ViewRegistroLabel_idServicio}"/>
-                        <h:outputText value="#{registroController.selected.idServicio.descripcion}"/>
+                        <h:outputText value="#{registroController.selected.idServicio.nombre}"/>
 
                         <h:outputText value="#{paquetesTuristicos.ViewRegistroLabel_idPaqueteTuristico}"/>
-                        <h:outputText value="#{registroController.selected.idPaqueteTuristico.descripcion}"/>
+                        <h:outputText value="#{registroController.selected.idPaqueteTuristico.nombre}"/>
 
                         <h:outputText value="#{paquetesTuristicos.ViewRegistroLabel_idMensaje}"/>
-                        <h:outputText value="#{registroController.selected.idMensaje.idMensaje}"/>
+                        <h:outputText value="#{registroController.selected.idMensaje.enunciado}"/>
 
                         <h:outputText value="#{paquetesTuristicos.ViewRegistroLabel_idCompraServPaqt}"/>
-                        <h:outputText value="#{registroController.selected.idCompraServPaqt.idCompraServPaqt}"/>
+                        <h:outputText value="#{registroController.selected.idCompraServPaqt.codigo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{paquetesTuristicos.Close}" onclick="PF('RegistroViewDialog').hide()"/>
                 </h:panelGroup>
