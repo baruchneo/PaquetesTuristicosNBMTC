@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Registro.findByIdRegistroLog", query = "SELECT r FROM Registro r WHERE r.idRegistroLog = :idRegistroLog"),
     @NamedQuery(name = "Registro.findByTitulo", query = "SELECT r FROM Registro r WHERE r.titulo = :titulo"),
     @NamedQuery(name = "Registro.findByDescripcion", query = "SELECT r FROM Registro r WHERE r.descripcion = :descripcion"),
-    @NamedQuery(name = "Registro.findByFechaRegistro", query = "SELECT r FROM Registro r WHERE r.fechaRegistro = :fechaRegistro"),
-    @NamedQuery(name = "Registro.findByIdPersona", query = "SELECT r FROM Registro r WHERE r.idPersona = :idPersona")})
+    @NamedQuery(name = "Registro.findByFechaRegistro", query = "SELECT r FROM Registro r WHERE r.fechaRegistro = :fechaRegistro")})
 public class Registro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,10 +58,9 @@ public class Registro implements Serializable {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_persona")
-    private int idPersona;
+    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @ManyToOne(optional = false)
+    private Persona idPersona;
     @JoinColumn(name = "id_tipo_registro", referencedColumnName = "id_tipo_registro")
     @ManyToOne(optional = false)
     private TipoRegistro idTipoRegistro;
@@ -86,12 +84,11 @@ public class Registro implements Serializable {
         this.idRegistroLog = idRegistroLog;
     }
 
-    public Registro(Integer idRegistroLog, String titulo, String descripcion, Date fechaRegistro, int idPersona) {
+    public Registro(Integer idRegistroLog, String titulo, String descripcion, Date fechaRegistro) {
         this.idRegistroLog = idRegistroLog;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaRegistro = fechaRegistro;
-        this.idPersona = idPersona;
     }
 
     public Integer getIdRegistroLog() {
@@ -126,11 +123,11 @@ public class Registro implements Serializable {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public int getIdPersona() {
+    public Persona getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(int idPersona) {
+    public void setIdPersona(Persona idPersona) {
         this.idPersona = idPersona;
     }
 

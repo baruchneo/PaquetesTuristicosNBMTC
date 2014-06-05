@@ -133,6 +133,8 @@ public class Persona implements Serializable {
     private Collection<Proveedor> proveedorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private Collection<PaqueteTuristico> paqueteTuristicoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private Collection<Registro> registroCollection;
     @JoinColumn(name = "id_tipo_persona", referencedColumnName = "id_tipo_persona")
     @ManyToOne(optional = false)
     private TipoPersona idTipoPersona;
@@ -315,6 +317,15 @@ public class Persona implements Serializable {
 
     public void setPaqueteTuristicoCollection(Collection<PaqueteTuristico> paqueteTuristicoCollection) {
         this.paqueteTuristicoCollection = paqueteTuristicoCollection;
+    }
+    
+    @XmlTransient
+    public Collection<Registro> getRegistroCollection() {
+        return registroCollection;
+    }
+
+    public void setRegistroCollection(Collection<Registro> registroCollection) {
+        this.registroCollection = registroCollection;
     }
 
     public TipoPersona getIdTipoPersona() {

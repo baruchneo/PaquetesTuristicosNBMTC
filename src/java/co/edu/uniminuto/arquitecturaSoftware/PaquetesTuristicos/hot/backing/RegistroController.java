@@ -21,6 +21,8 @@ public class RegistroController extends AbstractController<Registro> {
     private MensajesController idMensajeController;
     @Inject
     private CompraServiciosPaquetesController idCompraServPaqtController;
+    @Inject
+    private PersonaController idPersonaController;
 
     public RegistroController() {
         // Inform the Abstract parent controller of the concrete Registro?cap_first Entity
@@ -36,6 +38,7 @@ public class RegistroController extends AbstractController<Registro> {
         idPaqueteTuristicoController.setSelected(null);
         idMensajeController.setSelected(null);
         idCompraServPaqtController.setSelected(null);
+        idPersonaController.setSelected(null);
     }
 
     /**
@@ -100,6 +103,19 @@ public class RegistroController extends AbstractController<Registro> {
     public void prepareIdCompraServPaqt(ActionEvent event) {
         if (this.getSelected() != null && idCompraServPaqtController.getSelected() == null) {
             idCompraServPaqtController.setSelected(this.getSelected().getIdCompraServPaqt());
+        }
+    }
+    
+    /**
+     * Sets the "selected" attribute of the Persona controller
+     * in order to display its data in a dialog. This is reusing existing the
+     * existing View dialog.
+     *
+     * @param event Event object for the widget that triggered an action
+     */
+    public void prepareIdpersona(ActionEvent event) {
+        if (this.getSelected() != null && idPersonaController.getSelected() == null) {
+            idPersonaController.setSelected(this.getSelected().getIdPersona());
         }
     }
 }
